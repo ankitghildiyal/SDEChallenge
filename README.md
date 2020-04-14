@@ -1,24 +1,22 @@
-# PaytmLabs SDE Challenge
+The moving average interface calculates the average of last N elements
+in a stream. For example, moving average of 3 elements with stream of 5 elements will be calculated as below
+Stream  -   12 -> 23 -> 3 -> 78 -> 4  then average calculated when each element is added is
+Step 1 - Element 12 Average - 12/3 = 4.0
+Step 2 - Element 23 Average - 12+23/3 = 8.3333
+Step 3 - Element 3 Average - 12+23+3/3 = 12.6667
+Step 4 - Element 78 Average - 23+3+78/3  81.0
+Note that since we only want average of last 3 elements we have removed
+the first element when calculating the average
+Step 5 - Element 4 Average - 3+78+4/3 = 28.3333
 
-## Coding Question
+The interface has below 3 methods:
+List<Double> getAllElements() - This method will return list of all elements
+                           received from the stream till date.
 
-Write an interface for a data structure that can provide the moving average of the last N elements added, add elements to the structure and get access to the elements. Provide an efficient implementation of the interface for the data structure.
+void addElement(double streamElement) - Method used to add elements to calculator.
 
-### Minimum Requirements
+double getAverage() returns the average of last N elements added to the elements list.
+The average is rounded up (RoundingMode.HALF_UP) to 4 decimal places by default however the number of decimal places
+can be specified when instantiating the calculator using the constructor MovingAverageImpl(int averageSize, int decimalPointsInAverage).
 
-1. Provide a separate interface (IE `interface`/`trait`) with documentation for the data structure
-2. Provide an implementation for the interface
-3. Provide any additional explanation about the interface and implementation in a README file.
 
-## Design Question
-
-Design A Google Analytic like Backend System.
-We need to provide Google Analytic like services to our customers. Please provide a high level solution design for the backend system. Feel free to choose any open source tools as you want.
-
-### Requirements
-
-1. Handle large write volume: Billions of write events per day.
-2. Handle large read/query volume: Millions of merchants wish to gain insight into their business. Read/Query patterns are time-series related metrics.
-3. Provide metrics to customers with at most one hour delay.
-4. Run with minimum downtime.
-5. Have the ability to reprocess historical data in case of bugs in the processing logic.
